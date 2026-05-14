@@ -13,14 +13,20 @@ connectDB();
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://ishantpeblo.vercel.app',
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "https://ishantpeblo.vercel.app"
-    ],
+    origin: function (origin, callback) {
+      // allow requests with no origin (mobile apps, curl, Postman)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+      return callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
-
   })
 );
 
