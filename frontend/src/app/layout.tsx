@@ -17,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} h-full bg-gray-950 text-gray-100`}>
         <AuthProvider>
           {children}
+
           <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
         </AuthProvider>
       </body>
